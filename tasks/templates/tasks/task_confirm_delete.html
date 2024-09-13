@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>タスクの削除</h1>
+  <p>「{{ task.title }}」を削除してもよろしいですか？</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">削除</button>
+    <a href="{% url 'tasks:task_list' %}">キャンセル</a>
+  </form>
+{% endblock %}

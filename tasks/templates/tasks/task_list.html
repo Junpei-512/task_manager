@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">タスク一覧</h1>
+    <!-- 検索フォーム -->
+    <form method="get" class="form-inline mb-3">
+        <input type="text" name="q" class="form-control mr-2" placeholder="タイトルで検索" value="{{ request.GET.q }}">
+        <input type="date" name="due_date" class="form-control mr-2" value="{{ request.GET.due_date }}">
+<select name="urgency" class="form-control mr-2">
+    <option value="">すべての緊急度</option>
+    <option value="high" {% if request.GET.urgency == 'high' %}selected{% endif %}>高</option>
+    <option value="medium" {% if request.GET.urgency == 'medium' %}selected{% endif %}>中</option>
+    <option value="low" {% if request.GET.urgency == 'low' %}selected{% endif %}>低</option>
+</select>
+        <button type="submit" class="btn btn-primary">検索</button>
+        <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary ml-2">リセット</a>
+    </form>
+
+    <a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">新しいタスクを作成</a>
+    <ul class="list-group">
+        {% for task in tasks %}
+    {% if task.due_date and task.due_date < today and not task.is_completed %}
+        <li class="list-group-item list-group-item-danger">
+    {% else %}
+        <li class="list-group-item">
+    {% endif %}
+                <div>
+                    <a href="{% url 'tasks:task_detail' task.pk %}">{{ task.title }}</a>
+                    {% if task.is_completed %}
+                        <span class="badge badge-success">完了</span>
+                    {% else %}
+                        <span class="badge badge-warning">未完了</span>
+                    {% endif %}
+        <!-- 緊急度のバッジを追加 -->
+        {% if task.urgency == 'high' %}
+            <span class="badge badge-danger">高</span>
+        {% elif task.urgency == 'medium' %}
+            <span class="badge badge-primary">中</span>
+        {% else %}
+            <span class="badge badge-secondary">低</span>
+        {% endif %}
+                </div>
+            <!-- 進捗状況のプログレスバー -->
+            <div class="progress mt-2">
+                <div class="progress-bar" role="progressbar" style="width: {{ task.progress }}%;" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100">
+                    {{ task.progress }}%
+                </div>
+            </div>
+                <small>期限: {{ task.due_date }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">タスクがありません。</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+<!-- ページネーションのリンク -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center mt-4">
+    {% if tasks.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ tasks.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link" aria-hidden="true">&laquo;</span>
+      </li>
+    {% endif %}
+
+    {% for num in tasks.paginator.page_range %}
+      {% if tasks.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if tasks.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ tasks.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link" aria-hidden="true">&raquo;</span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
