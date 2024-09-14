@@ -20,6 +20,17 @@
             {{ task.progress }}%
         </div>
     </div>
+{% if task.subtasks.exists %}
+    <h3>サブタスク</h3>
+    <ul>
+        {% for subtask in task.subtasks.all %}
+            <li>
+                <a href="{% url 'tasks:task_detail' subtask.pk %}">{{ subtask.title }}</a>
+                - 進捗: {{ subtask.progress }}%
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
     <p><strong>状態：</strong>
         {% if task.is_completed %}
             <span class="badge badge-success">完了</span>

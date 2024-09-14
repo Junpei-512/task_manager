@@ -6,6 +6,7 @@ app_name = 'tasks'  # 名前空間を追加
 
 urlpatterns = [
     path('list/', views.task_list, name='task_list'),
+    path('update_progress/', views.update_progress, name='update_progress'),  # 追加
     path('task/<int:pk>/', views.task_detail, name='task_detail'),
     path('task/new/', views.task_create, name='task_create'),
     path('task/<int:pk>/edit/', views.task_edit, name='task_edit'),

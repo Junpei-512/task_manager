@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <h1 class="my-4">タスクの{% if form.instance.pk %}編集{% else %}作成{% endif %}</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             {{ form.title.label_tag }}
@@ -37,6 +37,10 @@
             {{ form.is_completed }}
             {{ form.is_completed.label_tag }}
         </div>
+<div class="form-group">
+    {{ form.parent.label_tag }}
+    {{ form.parent }}
+</div>
         <button type="submit" class="btn btn-primary">保存</button>
         <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">戻る</a>
     </form>

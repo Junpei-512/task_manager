@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from .models import Task
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -6,7 +7,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'description', 'due_date', 'urgency', 'progress','attachment', 'image', 'is_completed']
+        fields = ['title', 'description', 'due_date', 'urgency', 'progress','attachment', 'image', 'is_completed', 'parent']
         exclude = ['user']  # ユーザーフィールドを除外
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
@@ -15,6 +16,7 @@ class TaskForm(forms.ModelForm):
             'is_completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
              'progress': forms.NumberInput(attrs={'class': 'form-control', 'min': '0', 'max': '100'}),  # 追加
            'urgency': forms.Select(attrs={'class': 'form-control'}),  # ウィジェットを追加
+           'parent': forms.Select(attrs={'class': 'form-control'}),
         }
         
     def clean_attachment(self):

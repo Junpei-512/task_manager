@@ -16,8 +16,29 @@
         <button type="submit" class="btn btn-primary">検索</button>
         <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary ml-2">リセット</a>
     </form>
+    <!-- ソートとフィルタリングのフォーム -->
+    <form method="get" class="form-inline mb-4">
+        <!-- ソート -->
+        <label for="sort_by" class="mr-2">ソート:</label>
+        <select name="sort_by" id="sort_by" class="form-control mr-4">
+            <option value="">選択してください</option>
+            <option value="progress_asc" {% if request.GET.sort_by == 'progress_asc' %}selected{% endif %}>進捗昇順</option>
+            <option value="progress_desc" {% if request.GET.sort_by == 'progress_desc' %}selected{% endif %}>進捗降順</option>
+        </select>
+
+        <!-- フィルタリング -->
+        <label for="min_progress" class="mr-2">進捗範囲:</label>
+        <input type="number" name="min_progress" id="min_progress" class="form-control mr-2" placeholder="最小値" value="{{ request.GET.min_progress }}">
+        <input type="number" name="max_progress" id="max_progress" class="form-control mr-2" placeholder="最大値" value="{{ request.GET.max_progress }}">
+
+        <!-- フォーム送信ボタン -->
+        <button type="submit" class="btn btn-primary">適用</button>
+    </form>
 
     <a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">新しいタスクを作成</a>
+    <!-- 進捗一括更新フォームの開始 -->
+    <form method="post" action="{% url 'tasks:update_progress' %}">
+        {% csrf_token %}
     <ul class="list-group">
         {% for task in tasks %}
     {% if task.due_date and task.due_date < today and not task.is_completed %}
@@ -49,13 +70,20 @@
             </div>
                 <small>期限: {{ task.due_date }}</small>
             </li>
+            <!-- 進捗状況の入力フィールド -->
+            <div class="mt-2">
+                 <div class="form-inline">
+                    <label for="progress_{{ task.id }}" class="mr-2">進捗:</label>
+                    <input type="number" name="progress_{{ task.id }}" id="progress_{{ task.id }}" class="form-control mr-2" value="{{ task.progress }}" min="0" max="100">
+                </div>
         {% empty %}
             <li class="list-group-item">タスクがありません。</li>
         {% endfor %}
     </ul>
+    <!-- 更新ボタン -->
+    <button type="submit" class="btn btn-primary mt-3">進捗を更新</button>
+    </form>
 </div>
-{% endblock %}
-
 <!-- ページネーションのリンク -->
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center mt-4">
@@ -92,3 +120,5 @@
     {% endif %}
   </ul>
 </nav>
+{% endblock %}
+
