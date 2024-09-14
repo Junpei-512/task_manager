@@ -1,13 +1,17 @@
+from django.views import View
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, CustomUserCreationForm
 from django.db.models import Q
 from django.contrib.auth import views as auth_views
 from .forms import LoginForm
 from django.views.decorators.http import require_POST
+from django.contrib.auth import login  # 追加
+from django.contrib import messages
+from django.utils import timezone
 
 class CustomLoginView(LoginView):
     form_class = LoginForm
@@ -24,6 +28,7 @@ def task_list(request):
     query = request.GET.get('q')  # 検索キーワード
     due_date = request.GET.get('due_date')  # 期限フィルタ
     urgency = request.GET.get('urgency')
+    is_completed = request.GET.get('is_completed')  # 完了状態のフィルタ
 
     # フィルタリングの適用
     if query:
@@ -34,6 +39,11 @@ def task_list(request):
         
     if urgency:
         tasks = tasks.filter(urgency=urgency)
+
+    if is_completed == 'true':
+        tasks = tasks.filter(is_completed=True)
+    elif is_completed == 'false':
+        tasks = tasks.filter(is_completed=False)
 
     if min_progress or max_progress:
         min_progress = int(min_progress) if min_progress else 0
@@ -52,8 +62,13 @@ def task_list(request):
     paginator = Paginator(tasks, 10)  # 1ページあたり10件表示
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    context = {
+        'tasks': page_obj,
+        'now': timezone.now(),
+        # 他のコンテキスト
+    }
 
-    return render(request, 'tasks/task_list.html', {'tasks': page_obj})
+    return render(request, 'tasks/task_list.html', context)
     
 @login_required
 def task_detail(request, pk):
@@ -93,14 +108,15 @@ def task_edit(request, pk):
         form = TaskForm(request.POST, request.FILES, instance=task)
         if form.is_valid():
             task = form.save(commit=False)
-            task.is_completed = True if task.progress >= 100 else False
-            task.save()
             form.save_m2m()
 
             # 親タスクの進捗を更新
             if task.parent:
                 task.parent.update_progress_from_subtasks()
 
+            # 完了状態が False の場合、進捗が 100 であれば 99 に設定
+            if not task.is_completed and task.progress >= 100:
+                task.progress = 95
             # 進捗に応じて完了状態を更新
             if task.progress >= 100:
                 task.is_completed = True
@@ -127,6 +143,18 @@ def task_complete(request, pk):
     task.save()
     return redirect('tasks:task_list')
 
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # ユーザーをログインさせる
+            messages.success(request, _('Your account was created.'))
+            return redirect('tasks:task_list')  # タスク一覧ページにリダイレクト
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+    
 @login_required
 @require_POST
 def update_progress(request):
@@ -142,7 +170,21 @@ def update_progress(request):
                 task.progress = int(progress)
                 task.is_completed = True if int(progress) >= 100 else False
                 task.save()
-            except Task.DoesNotExist:
+            except (Task.DoesNotExist, ValueError):
                 continue  # タスクが存在しない場合はスキップ
 
     return redirect('tasks:task_list')
+    
+class RegisterView(View):
+    def get(self, request):
+        form = CustomUserCreationForm()
+        return render(request, 'registration/register.html', {'form': form})
+
+    def post(self, request):
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, _('Your account was created.'))
+            return redirect('tasks:task_list')
+        return render(request, 'registration/register.html', {'form': form})

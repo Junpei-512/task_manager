@@ -1,34 +1,60 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>タスク管理アプリ</title>
+    <title>Task Manager</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as languages %}
+        {% for lang_code, lang_name in languages %}
+            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                {{ lang_name }}
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="{% trans '言語を変更' %}">
+</form>
+    <!-- メッセージの表示 -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <li class="btn btn-link nav-link">
-    <span class="navbar-text">タスク管理アプリ</span>
+    <span class="navbar-text">Task Manager</span>
     </li>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="btn btn-link nav-link">
-                    <span class="navbar-text">こんにちは、{{ user.username }} さん</span>
+                    <span class="navbar-text">{% trans "こんにちは、" %}{{ user.username }} {% trans "さん" %}</span>
                 </li>
 <form method="post" action="{% url 'logout' %}" style="display: inline;">
     {% csrf_token %}
     <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0; border: none; background: none; cursor: pointer;">
-        ログアウト
+        {% trans "ログアウト" %}
     </button>
 </form>            {% else %}
                 <li class="btn btn-link nav-link">
-                    <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                    <a class="nav-link" href="{% url 'login' %}">{% trans "ログイン" %}</a>
                 </li>
             {% endif %}
         </ul>

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-  <h1>タスクの削除</h1>
-  <p>「{{ task.title }}」を削除してもよろしいですか？</p>
+  <h1>{% trans "タスクの削除" %}</h1>
+  <p>{% blocktrans %}「{{ task.title }}」を削除してもよろしいですか？{% endblocktrans %}</p>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">削除</button>
-    <a href="{% url 'tasks:task_list' %}">キャンセル</a>
+    <button type="submit">{% trans "削除" %}</button>
+    <a href="{% url 'tasks:task_list' %}">{% trans "キャンセル" %}</a>
   </form>
 {% endblock %}

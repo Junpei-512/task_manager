@@ -1,58 +1,59 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="container">
     <h1 class="my-4">{{ task.title }}</h1>
-    <p><strong>説明：</strong> {{ task.description }}</p>
-    <p><strong>期限：</strong> {{ task.due_date }}</p>
-    <p><strong>緊急度：</strong>
+    <p><strong>{% trans "説明" %}：</strong> {{ task.description }}</p>
+    <p><strong>{% trans "期限" %}：</strong> {{ task.due_date }}</p>
+    <p><strong>{% trans "緊急度" %}：</strong>
     {% if task.urgency == 'high' %}
-        高
+        {% trans "高" %}
     {% elif task.urgency == 'medium' %}
-        中
+        {% trans "中" %}
     {% else %}
-        低
+        {% trans "低" %}
     {% endif %}
 </p>
-    <p><strong>進捗状況：</strong></p>
+    <p><strong>{% trans "進捗状況" %}：</strong></p>
     <div class="progress mb-3">
         <div class="progress-bar" role="progressbar" style="width: {{ task.progress }}%;" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100">
             {{ task.progress }}%
         </div>
     </div>
 {% if task.subtasks.exists %}
-    <h3>サブタスク</h3>
+    <h3>{% trans "サブタスク" %}</h3>
     <ul>
         {% for subtask in task.subtasks.all %}
             <li>
                 <a href="{% url 'tasks:task_detail' subtask.pk %}">{{ subtask.title }}</a>
-                - 進捗: {{ subtask.progress }}%
+                - {% trans "進捗" %}: {{ subtask.progress }}%
             </li>
         {% endfor %}
     </ul>
 {% endif %}
-    <p><strong>状態：</strong>
+    <p><strong>{% trans "状態" %}：</strong>
         {% if task.is_completed %}
-            <span class="badge badge-success">完了</span>
+            <span class="badge badge-success">{% trans "完了" %}</span>
         {% else %}
-            <span class="badge badge-warning">未完了</span>
+            <span class="badge badge-warning">{% trans "未完了" %}</span>
         {% endif %}
     </p>
     {% if task.attachment %}
-        <p><strong>添付ファイル：</strong> <a href="{{ task.attachment.url }}" target="_blank">{{ task.attachment.name }}</a></p>
+        <p><strong>{% trans "添付ファイル" %}：</strong> <a href="{{ task.attachment.url }}" target="_blank">{{ task.attachment.name }}</a></p>
     {% endif %}
     {% if task.image %}
-        <p><strong>画像：</strong></p>
+        <p><strong>{% trans "画像" %}：</strong></p>
         <img src="{{ task.image.url }}" alt="{{ task.title }}" class="img-fluid mb-3">
     {% endif %}
 <a href="{% url 'tasks:task_edit' task.pk %}" class="btn btn-info">
-    <i class="fas fa-edit"></i> 編集
+    <i class="fas fa-edit"></i> {% trans "編集" %}
 </a>
-    <a href="{% url 'tasks:task_complete' task.pk %}" class="btn btn-success">完了にする</a>
+    <a href="{% url 'tasks:task_complete' task.pk %}" class="btn btn-success">{% trans "完了にする" %}</a>
     <form action="{% url 'tasks:task_delete' task.pk %}" method="post" style="display:inline;">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">削除</button>
+        <button type="submit" class="btn btn-danger">{% trans "削除" %}</button>
     </form>
-    <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">戻る</a>
+    <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">{% trans "戻る" %}</a>
 </div>
 {% endblock %}

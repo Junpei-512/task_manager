@@ -1,0 +1,33 @@
+{% autoescape off %}
+{{ user.username }} 様
+
+いつもご利用いただきありがとうございます。タスクの期限に関するお知らせです。
+
+{% if overdue_tasks.exists %}
+【期限が過ぎているタスク】
+{% for task in overdue_tasks %}
+- {{ task.title }}（期限: {{ task.due_date }}）
+{% endfor %}
+{% endif %}
+
+{% if tasks_in_24_hours.exists %}
+【24時間以内に期限を迎えるタスク】
+{% for task in tasks_in_24_hours %}
+- {{ task.title }}（期限: {{ task.due_date }}）
+{% endfor %}
+{% endif %}
+
+{% if tasks_in_72_hours.exists %}
+【72時間以内に期限を迎えるタスク】
+{% for task in tasks_in_72_hours %}
+- {{ task.title }}（期限: {{ task.due_date }}）
+{% endfor %}
+{% endif %}
+
+タスクの詳細や更新は以下のリンクからご確認ください。
+http://yourdomain.com/tasks/list/
+
+引き続きよろしくお願いいたします。
+
+※このメールは自動送信されています。
+{% endautoescape %}

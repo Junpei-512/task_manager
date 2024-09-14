@@ -1,65 +1,71 @@
 {% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="container">
-    <h1 class="my-4">タスク一覧</h1>
+    <h1 class="my-4">{% trans "タスク一覧" %}</h1>
     <!-- 検索フォーム -->
     <form method="get" class="form-inline mb-3">
         <input type="text" name="q" class="form-control mr-2" placeholder="タイトルで検索" value="{{ request.GET.q }}">
         <input type="date" name="due_date" class="form-control mr-2" value="{{ request.GET.due_date }}">
 <select name="urgency" class="form-control mr-2">
-    <option value="">すべての緊急度</option>
-    <option value="high" {% if request.GET.urgency == 'high' %}selected{% endif %}>高</option>
-    <option value="medium" {% if request.GET.urgency == 'medium' %}selected{% endif %}>中</option>
-    <option value="low" {% if request.GET.urgency == 'low' %}selected{% endif %}>低</option>
+    <option value="">{% trans "すべての緊急度" %}</option>
+    <option value="high" {% if request.GET.urgency == 'high' %}selected{% endif %}>{% trans "高" %}</option>
+    <option value="medium" {% if request.GET.urgency == 'medium' %}selected{% endif %}>{% trans "中" %}</option>
+    <option value="low" {% if request.GET.urgency == 'low' %}selected{% endif %}>{% trans "低" %}</option>
 </select>
-        <button type="submit" class="btn btn-primary">検索</button>
-        <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary ml-2">リセット</a>
+        <button type="submit" class="btn btn-primary">{% trans "検索" %}</button>
+        <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary ml-2">{% trans "リセット" %}</a>
     </form>
     <!-- ソートとフィルタリングのフォーム -->
     <form method="get" class="form-inline mb-4">
         <!-- ソート -->
         <label for="sort_by" class="mr-2">ソート:</label>
         <select name="sort_by" id="sort_by" class="form-control mr-4">
-            <option value="">選択してください</option>
-            <option value="progress_asc" {% if request.GET.sort_by == 'progress_asc' %}selected{% endif %}>進捗昇順</option>
-            <option value="progress_desc" {% if request.GET.sort_by == 'progress_desc' %}selected{% endif %}>進捗降順</option>
+            <option value="">{% trans "選択してください" %}</option>
+            <option value="progress_asc" {% if request.GET.sort_by == 'progress_asc' %}selected{% endif %}>{% trans "進捗昇順" %}</option>
+            <option value="progress_desc" {% if request.GET.sort_by == 'progress_desc' %}selected{% endif %}>{% trans "進捗降順" %}</option>
         </select>
 
         <!-- フィルタリング -->
-        <label for="min_progress" class="mr-2">進捗範囲:</label>
+        <label for="min_progress" class="mr-2">{% trans "進捗範囲" %}:</label>
         <input type="number" name="min_progress" id="min_progress" class="form-control mr-2" placeholder="最小値" value="{{ request.GET.min_progress }}">
         <input type="number" name="max_progress" id="max_progress" class="form-control mr-2" placeholder="最大値" value="{{ request.GET.max_progress }}">
 
+    <!-- 完了状態のフィルタリングを追加 -->
+    <label for="is_completed" class="mr-2">{% trans "完了状態" %}:</label>
+    <select name="is_completed" id="is_completed" class="form-control mr-4">
+        <option value="">{% trans "すべて" %}</option>
+        <option value="true" {% if request.GET.is_completed == 'true' %}selected{% endif %}>{% trans "完了" %}</option>
+        <option value="false" {% if request.GET.is_completed == 'false' %}selected{% endif %}>{% trans "未完了" %}</option>
+    </select>
+
         <!-- フォーム送信ボタン -->
-        <button type="submit" class="btn btn-primary">適用</button>
+        <button type="submit" class="btn btn-primary">{% trans "適用" %}</button>
     </form>
 
-    <a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">新しいタスクを作成</a>
+    <a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">{% trans "新しいタスクを作成" %}</a>
     <!-- 進捗一括更新フォームの開始 -->
     <form method="post" action="{% url 'tasks:update_progress' %}">
         {% csrf_token %}
     <ul class="list-group">
         {% for task in tasks %}
-    {% if task.due_date and task.due_date < today and not task.is_completed %}
-        <li class="list-group-item list-group-item-danger">
-    {% else %}
-        <li class="list-group-item">
-    {% endif %}
+        <li class="list-group-item {{ task.get_bg_class }}">
                 <div>
                     <a href="{% url 'tasks:task_detail' task.pk %}">{{ task.title }}</a>
                     {% if task.is_completed %}
-                        <span class="badge badge-success">完了</span>
+                        <span class="badge badge-success">{% trans "完了" %}</span>
                     {% else %}
-                        <span class="badge badge-warning">未完了</span>
+                        <span class="badge badge-warning">{% trans "未完了" %}</span>
                     {% endif %}
         <!-- 緊急度のバッジを追加 -->
         {% if task.urgency == 'high' %}
-            <span class="badge badge-danger">高</span>
+            <span class="badge badge-danger">{% trans "高" %}</span>
         {% elif task.urgency == 'medium' %}
-            <span class="badge badge-primary">中</span>
+            <span class="badge badge-primary">{% trans "中" %}</span>
         {% else %}
-            <span class="badge badge-secondary">低</span>
+            <span class="badge badge-secondary">{% trans "低" %}</span>
         {% endif %}
                 </div>
             <!-- 進捗状況のプログレスバー -->
@@ -68,20 +74,20 @@
                     {{ task.progress }}%
                 </div>
             </div>
-                <small>期限: {{ task.due_date }}</small>
+                <small>{% trans "期限" %}: {{ task.due_date }}</small>
             </li>
             <!-- 進捗状況の入力フィールド -->
             <div class="mt-2">
                  <div class="form-inline">
-                    <label for="progress_{{ task.id }}" class="mr-2">進捗:</label>
+                    <label for="progress_{{ task.id }}" class="mr-2">{% trans "進捗" %}:</label>
                     <input type="number" name="progress_{{ task.id }}" id="progress_{{ task.id }}" class="form-control mr-2" value="{{ task.progress }}" min="0" max="100">
                 </div>
         {% empty %}
-            <li class="list-group-item">タスクがありません。</li>
+            <li class="list-group-item">{% trans "タスクがありません。" %}</li>
         {% endfor %}
     </ul>
     <!-- 更新ボタン -->
-    <button type="submit" class="btn btn-primary mt-3">進捗を更新</button>
+    <button type="submit" class="btn btn-primary mt-3">{% trans "進捗を更新" %}</button>
     </form>
 </div>
 <!-- ページネーションのリンク -->

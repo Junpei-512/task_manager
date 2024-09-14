@@ -1,0 +1,264 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 00:19+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: tasks/models.py:14
+msgid "Title"
+msgstr "タイトル"
+
+#: tasks/models.py:15
+msgid "Description"
+msgstr "説明"
+
+#: tasks/models.py:16
+msgid "Completed"
+msgstr "完了"
+
+#: tasks/models.py:17
+msgid "Deadline"
+msgstr "期限"
+
+#: tasks/models.py:19
+msgid "Urgency"
+msgstr "緊急度"
+
+#: tasks/models.py:20
+msgid "Progress(%)"
+msgstr "進捗率(%)"
+
+#: tasks/models.py:21
+msgid "Attached file"
+msgstr "添付ファイル"
+
+#: tasks/models.py:22
+msgid "Image"
+msgstr "画像"
+
+#: tasks/templates/registration/login.html:6
+#: tasks/templates/registration/login.html:31
+msgid "ログイン"
+msgstr "ログイン"
+
+#: tasks/templates/registration/login.html:24
+msgid "ユーザー名"
+msgstr "ユーザー名"
+
+#: tasks/templates/registration/login.html:28
+msgid "パスワード"
+msgstr "パスワード"
+
+#: tasks/templates/registration/login.html:33
+msgid "アカウントをお持ちでない場合は、"
+msgstr "アカウントをお持ちでない場合は、"
+
+#: tasks/templates/registration/login.html:33
+msgid "こちら"
+msgstr "こちら"
+
+#: tasks/templates/registration/login.html:33
+#, fuzzy
+#| msgid "選択してください"
+msgid "から登録してください。"
+msgstr "から登録してください。"
+
+#: tasks/templates/registration/register.html:6
+msgid "新規ユーザー登録"
+msgstr "新規ユーザー登録"
+
+#: tasks/templates/registration/register.html:10
+msgid "登録"
+msgstr "登録"
+
+#: tasks/templates/registration/register.html:12
+msgid "既にアカウントをお持ちですか？"
+msgstr "既にアカウントをお持ちですか？"
+
+#: tasks/templates/registration/register.html:12
+msgid "ログインはこちら"
+msgstr "ログインはこちら"
+
+#: tasks/templates/tasks/task_confirm_delete.html:5
+msgid "タスクの削除"
+msgstr "タスクの削除"
+
+#: tasks/templates/tasks/task_confirm_delete.html:6
+#, python-format
+msgid "「%(task.title)s」を削除してもよろしいですか？"
+msgstr "「%(task.title)s」を削除してもよろしいですか？"
+
+#: tasks/templates/tasks/task_confirm_delete.html:9
+#: tasks/templates/tasks/task_detail.html:55
+msgid "削除"
+msgstr "削除"
+
+#: tasks/templates/tasks/task_confirm_delete.html:10
+msgid "キャンセル"
+msgstr "キャンセル"
+
+#: tasks/templates/tasks/task_detail.html:7
+msgid "説明"
+msgstr "説明"
+
+#: tasks/templates/tasks/task_detail.html:8
+#: tasks/templates/tasks/task_list.html:77
+msgid "期限"
+msgstr "期限"
+
+#: tasks/templates/tasks/task_detail.html:9
+msgid "緊急度"
+msgstr "緊急度"
+
+#: tasks/templates/tasks/task_detail.html:11
+#: tasks/templates/tasks/task_list.html:14
+#: tasks/templates/tasks/task_list.html:64
+msgid "高"
+msgstr "高"
+
+#: tasks/templates/tasks/task_detail.html:13
+#: tasks/templates/tasks/task_list.html:15
+#: tasks/templates/tasks/task_list.html:66
+msgid "中"
+msgstr "中"
+
+#: tasks/templates/tasks/task_detail.html:15
+#: tasks/templates/tasks/task_list.html:16
+#: tasks/templates/tasks/task_list.html:68
+msgid "低"
+msgstr "低"
+
+#: tasks/templates/tasks/task_detail.html:18
+msgid "進捗状況"
+msgstr "進捗状況"
+
+#: tasks/templates/tasks/task_detail.html:25
+msgid "サブタスク"
+msgstr "サブタスク"
+
+#: tasks/templates/tasks/task_detail.html:30
+#: tasks/templates/tasks/task_list.html:82
+msgid "進捗"
+msgstr "進捗"
+
+#: tasks/templates/tasks/task_detail.html:35
+msgid "状態"
+msgstr "状態"
+
+#: tasks/templates/tasks/task_detail.html:37
+#: tasks/templates/tasks/task_list.html:40
+#: tasks/templates/tasks/task_list.html:58
+msgid "完了"
+msgstr "完了"
+
+#: tasks/templates/tasks/task_detail.html:39
+#: tasks/templates/tasks/task_list.html:41
+#: tasks/templates/tasks/task_list.html:60
+msgid "未完了"
+msgstr "未完了"
+
+#: tasks/templates/tasks/task_detail.html:43
+msgid "添付ファイル"
+msgstr "添付ファイル"
+
+#: tasks/templates/tasks/task_detail.html:46
+msgid "画像"
+msgstr "画像"
+
+#: tasks/templates/tasks/task_detail.html:50
+msgid "編集"
+msgstr "編集"
+
+#: tasks/templates/tasks/task_detail.html:52
+msgid "完了にする"
+msgstr "完了にする"
+
+#: tasks/templates/tasks/task_detail.html:57
+#: tasks/templates/tasks/task_form.html:46
+msgid "戻る"
+msgstr "戻る"
+
+#: tasks/templates/tasks/task_form.html:6
+msgid "タスクの編集"
+msgstr "タスクの編集"
+
+#: tasks/templates/tasks/task_form.html:6
+msgid "タスクの作成"
+msgstr "タスクの作成"
+
+#: tasks/templates/tasks/task_form.html:45
+msgid "保存"
+msgstr "保存"
+
+#: tasks/templates/tasks/task_list.html:7
+msgid "タスク一覧"
+msgstr "タスク一覧"
+
+#: tasks/templates/tasks/task_list.html:13
+msgid "すべての緊急度"
+msgstr "すべての緊急度"
+
+#: tasks/templates/tasks/task_list.html:18
+msgid "検索"
+msgstr "検索"
+
+#: tasks/templates/tasks/task_list.html:19
+msgid "リセット"
+msgstr "リセット"
+
+#: tasks/templates/tasks/task_list.html:26
+msgid "選択してください"
+msgstr "選択してください"
+
+#: tasks/templates/tasks/task_list.html:27
+msgid "進捗昇順"
+msgstr "進捗昇順"
+
+#: tasks/templates/tasks/task_list.html:28
+msgid "進捗降順"
+msgstr "進捗降順"
+
+#: tasks/templates/tasks/task_list.html:32
+msgid "進捗範囲"
+msgstr "進捗範囲"
+
+#: tasks/templates/tasks/task_list.html:37
+msgid "完了状態"
+msgstr "完了状態"
+
+#: tasks/templates/tasks/task_list.html:39
+msgid "すべて"
+msgstr "すべて"
+
+#: tasks/templates/tasks/task_list.html:45
+msgid "適用"
+msgstr "適用"
+
+#: tasks/templates/tasks/task_list.html:48
+msgid "新しいタスクを作成"
+msgstr "新しいタスクを作成"
+
+#: tasks/templates/tasks/task_list.html:86
+msgid "タスクがありません。"
+msgstr "タスクがありません。"
+
+#: tasks/templates/tasks/task_list.html:90
+msgid "進捗を更新"
+msgstr "進捗を更新"
+
+#: tasks/views.py:152 tasks/views.py:188
+msgid "Your account was created."
+msgstr "アカウントが作成されました。"

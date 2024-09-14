@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from decouple import config  # 追加
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks',
+    'django_crontab',
+]
+
+CRONJOBS = [
+    ('0 9 * * *', 'tasks.management.commands.send_reminder_emails.Command.handle', '>> /tmp/cron.log 2>&1'),
 ]
 
 MIDDLEWARE = [
@@ -38,6 +44,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -122,3 +129,32 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 10MB 以下に制限
 MAX_UPLOAD_SIZE = 10485760  # 10 * 1024 * 1024 bytes
+
+# メールバックエンドの設定
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # メールサーバーのホスト名（例としてGmailを使用）
+EMAIL_PORT = 587  # メールサーバーのポート番号
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # 送信元のメールアドレス
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') # メールアドレスのパスワード
+EMAIL_USE_TLS = True  # TLSを使用する場合はTrue
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LANGUAGE_CODE = 'ja'  # デフォルトの言語コード（日本語の場合は 'ja'）
+
+TIME_ZONE = 'Asia/Tokyo'  # 日本のタイムゾーン
+
+USE_I18N = True  # 国際化を有効にする
+USE_L10N = True  # 地域化を有効にする
+USE_TZ = True
+
+# サポートする言語の設定
+LANGUAGES = [
+    ('en', _('English')),
+    ('ja', _('Japanese')),
+    ('zh-hans', _('Chinese (Simplified)')),
+]
+
+# ロケールディレクトリの設定
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]

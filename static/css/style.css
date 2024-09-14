@@ -6,6 +6,22 @@ body {
     font-weight: bold;
 }
 
+.bg-completed {
+    background-color: #d4edda; /* 薄い緑色 */
+}
+
+.bg-overdue {
+    background-color: #f8d7da; /* 薄い赤色 */
+}
+
+.bg-less-than-24-hours {
+    background-color: #fff3cd; /* 薄い黄色 */
+}
+
+.bg-less-than-72-hours {
+    background-color: #fff8e1; /* さらに薄い黄色 */
+}
+
 .list-group-item-danger {
     background-color: #f8d7da;
 }
@@ -13,3 +29,4 @@ body {
 .form-control, .form-check-input {
     margin-bottom: 15px;
 }
+
