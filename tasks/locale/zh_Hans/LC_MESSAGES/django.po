@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 00:19+0900\n"
+"POT-Creation-Date: 2024-09-15 01:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,18 +64,14 @@ msgid "パスワード"
 msgstr "密码"
 
 #: tasks/templates/registration/login.html:33
-msgid "アカウントをお持ちでない場合は、"
-msgstr "如果你还没有帐户的话，"
+#, fuzzy
+#| msgid "アカウントをお持ちでない場合は、"
+msgid "アカウントをお持ちでない場合は"
+msgstr "没有帐户，"
 
 #: tasks/templates/registration/login.html:33
 msgid "こちら"
-msgstr "这里"
-
-#: tasks/templates/registration/login.html:33
-#, fuzzy
-#| msgid "選択してください"
-msgid "から登録してください。"
-msgstr "注册"
+msgstr "打这里"
 
 #: tasks/templates/registration/register.html:6
 msgid "新規ユーザー登録"
@@ -263,3 +259,8 @@ msgstr "更新进展"
 #: tasks/views.py:152 tasks/views.py:188
 msgid "Your account was created."
 msgstr "做好了你的帐户"
+
+#, fuzzy
+#~| msgid "選択してください"
+#~ msgid "こちらから登録してください。"
+#~ msgstr "请在这里注册一下。"
