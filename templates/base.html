@@ -45,9 +45,7 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="btn btn-link nav-link">
-                    {% blocktrans %}
-                    <span class="navbar-text">こんにちは、{{ user.username }} さん</span>
-                    {% endblocktrans %}
+                    <span class="navbar-text">{% trans "こんにちは、" %}{{ user.username }} {% trans "さん" %}</span>
                 </li>
 <form method="post" action="{% url 'logout' %}" style="display: inline;">
     {% csrf_token %}

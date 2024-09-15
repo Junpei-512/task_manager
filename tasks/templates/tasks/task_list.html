@@ -7,7 +7,7 @@
     <h1 class="my-4">{% trans "タスク一覧" %}</h1>
     <!-- 検索フォーム -->
     <form method="get" class="form-inline mb-3">
-        <input type="text" name="q" class="form-control mr-2" placeholder="タイトルで検索" value="{{ request.GET.q }}">
+        <input type="text" name="q" class="form-control mr-2" placeholder="Title" value="{{ request.GET.q }}">
         <input type="date" name="due_date" class="form-control mr-2" value="{{ request.GET.due_date }}">
 <select name="urgency" class="form-control mr-2">
     <option value="">{% trans "すべての緊急度" %}</option>
@@ -30,8 +30,8 @@
 
         <!-- フィルタリング -->
         <label for="min_progress" class="mr-2">{% trans "進捗範囲" %}:</label>
-        <input type="number" name="min_progress" id="min_progress" class="form-control mr-2" placeholder="最小値" value="{{ request.GET.min_progress }}">
-        <input type="number" name="max_progress" id="max_progress" class="form-control mr-2" placeholder="最大値" value="{{ request.GET.max_progress }}">
+        <input type="number" name="min_progress" id="min_progress" class="form-control mr-2" placeholder="Min" value="{{ request.GET.min_progress }}">
+        <input type="number" name="max_progress" id="max_progress" class="form-control mr-2" placeholder="Max" value="{{ request.GET.max_progress }}">
 
     <!-- 完了状態のフィルタリングを追加 -->
     <label for="is_completed" class="mr-2">{% trans "完了状態" %}:</label>

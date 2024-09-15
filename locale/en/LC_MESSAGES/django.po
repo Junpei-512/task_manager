@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 10:45+0900\n"
+"POT-Creation-Date: 2024-09-15 12:30+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,36 +20,35 @@ msgstr ""
 
 #: task_manager/settings.py:152
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: task_manager/settings.py:153
 msgid "Japanese"
-msgstr ""
+msgstr "Japanese"
 
 #: task_manager/settings.py:154
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Chinese"
 
 #: templates/base.html:27
 msgid "言語を変更"
-msgstr ""
+msgstr "Transfer"
 
 #: templates/base.html:48
-#, python-format
-msgid ""
-"\n"
-"                    <span class=\"navbar-text\">こんにち"
-"は、%(user.username)s さん</span>\n"
-"                    "
-msgstr ""
+msgid "こんにちは、"
+msgstr "Hello, "
 
-#: templates/base.html:55
+#: templates/base.html:48
+msgid "さん"
+msgstr "."
+
+#: templates/base.html:54
 msgid "ログアウト"
-msgstr ""
+msgstr "LOGOUT"
 
-#: templates/base.html:59
+#: templates/base.html:58
 msgid "ログイン"
-msgstr ""
+msgstr "LOGIN"
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"

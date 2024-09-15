@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 10:45+0900\n"
+"POT-Creation-Date: 2024-09-15 12:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,36 +20,35 @@ msgstr ""
 
 #: task_manager/settings.py:152
 msgid "English"
-msgstr ""
+msgstr "英语"
 
 #: task_manager/settings.py:153
 msgid "Japanese"
-msgstr ""
+msgstr "日语"
 
 #: task_manager/settings.py:154
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "中文"
 
 #: templates/base.html:27
 msgid "言語を変更"
-msgstr ""
+msgstr "翻译"
 
 #: templates/base.html:48
-#, python-format
-msgid ""
-"\n"
-"                    <span class=\"navbar-text\">こんにち"
-"は、%(user.username)s さん</span>\n"
-"                    "
-msgstr ""
+msgid "こんにちは、"
+msgstr "欢迎"
 
-#: templates/base.html:55
+#: templates/base.html:48
+msgid "さん"
+msgstr "。"
+
+#: templates/base.html:54
 msgid "ログアウト"
-msgstr ""
+msgstr "退出"
 
-#: templates/base.html:59
+#: templates/base.html:58
 msgid "ログイン"
-msgstr ""
+msgstr "登录"
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
@@ -774,59 +773,59 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:7
 msgid "Monday"
-msgstr ""
+msgstr "星期一"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:8
 msgid "Tuesday"
-msgstr ""
+msgstr "星期二"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:9
 msgid "Wednesday"
-msgstr ""
+msgstr "星期三"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:10
 msgid "Thursday"
-msgstr ""
+msgstr "星期四"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:11
 msgid "Friday"
-msgstr ""
+msgstr "星期五"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:12
 msgid "Saturday"
-msgstr ""
+msgstr "星期六"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:13
 msgid "Sunday"
-msgstr ""
+msgstr "星期日"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:16
 msgid "Mon"
-msgstr ""
+msgstr "一"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:17
 msgid "Tue"
-msgstr ""
+msgstr "二"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:18
 msgid "Wed"
-msgstr ""
+msgstr "三"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:19
 msgid "Thu"
-msgstr ""
+msgstr "四"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:20
 msgid "Fri"
-msgstr ""
+msgstr "五"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:21
 msgid "Sat"
-msgstr ""
+msgstr "六"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:22
 msgid "Sun"
-msgstr ""
+msgstr "日"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:25
 msgid "January"

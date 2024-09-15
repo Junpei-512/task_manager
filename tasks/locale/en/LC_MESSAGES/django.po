@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 11:04+0900\n"
+"POT-Creation-Date: 2024-09-15 12:28+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,9 +86,6 @@ msgid "パスワード"
 msgstr "Password"
 
 #: tasks/templates/registration/login.html:34
-msgid "registerU"
-msgstr "Please register user from here."
-
 #: tasks/templates/registration/register.html:6
 msgid "新規ユーザー登録"
 msgstr "Register new User"
@@ -275,6 +272,9 @@ msgstr "Update progress"
 #: tasks/views.py:152 tasks/views.py:188
 msgid "Your account was created."
 msgstr "Your account was created."
+
+#~ msgid "registerU"
+#~ msgstr "Please register user from here."
 
 #, fuzzy
 #~| msgid "新規ユーザー登録"
