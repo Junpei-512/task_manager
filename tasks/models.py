@@ -10,10 +10,12 @@ URGENCY_CHOICES = [
     ('high', '高'),
 ]
 
+
 class Task(models.Model):
     title = models.CharField(_('Title'), max_length=200)
     description = models.TextField(_('Description'), blank=True)
     is_completed = models.BooleanField(_('Completed'), default=False)
+    completed_at = models.DateTimeField(null=True, blank=True)  # 完了日時を保存するフィールド
     due_date = models.DateField(_('Deadline'), null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     urgency = models.CharField(_('Urgency'), max_length=6, choices=URGENCY_CHOICES, default='medium')
@@ -21,10 +23,8 @@ class Task(models.Model):
     attachment = models.FileField(_('Attached file'), upload_to='attachments/', null=True, blank=True)  # 追加
     image = models.ImageField(_('Image'), upload_to='images/', null=True, blank=True)  # 追加
     parent = models.ForeignKey('self', null=True, blank=True, related_name='subtasks', on_delete=models.CASCADE)  # 追加
+    related_task = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='related_tasks')  # 関連タスク
      
-    def __str__(self):
-        return self.title
-        
     def update_progress_from_subtasks(self):
         if self.subtasks.exists():
             total_progress = sum(subtask.progress for subtask in self.subtasks.all())
@@ -51,3 +51,28 @@ class Task(models.Model):
         if self.is_completed:
             self.progress = 100
         super().save(*args, **kwargs)
+        
+    def complete(self):
+        if not self.is_completed:
+            self.is_completed = True
+            self.completed_at = timezone.now()  # 完了日時を記録
+            self.save()
+
+    def can_be_uncompleted(self):
+        # 完了から72時間以内なら「未完了」に戻せる
+        if self.completed_at and (timezone.now() - self.completed_at).total_seconds() > 72 * 3600:
+            return False
+        return True
+        
+    def __str__(self):
+        return self.title
+        
+
+        
+class ProgressHistory(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='progress_history')
+    progress = models.IntegerField(_('進捗'))
+    timestamp = models.DateTimeField(_('日時'), default=timezone.now)
+
+    def __str__(self):
+        return f"{self.task.title} - {self.progress}% at {self.timestamp}"

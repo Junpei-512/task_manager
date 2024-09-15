@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 12:32+0900\n"
+"POT-Creation-Date: 2024-09-15 22:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: tasks/forms.py:28
+#: tasks/forms.py:29
 #, fuzzy
 #| msgid "選択してください"
 msgid "ファイルサイズは10MB以下にしてください。"
 msgstr "请上载10MB以下的附件。"
 
-#: tasks/forms.py:34
+#: tasks/forms.py:35
 #, fuzzy
 #| msgid "選択してください"
 msgid "画像サイズは10MB以下にしてください。"
 msgstr "请上载10MB以下的图像。"
 
-#: tasks/forms.py:43
+#: tasks/forms.py:44
 #, fuzzy
 #| msgid "アカウントをお持ちでない場合は、"
 msgid "アカウントが作成されました。"
 msgstr "帐户做好了。"
 
-#: tasks/forms.py:59
+#: tasks/forms.py:60
 msgid "email"
 msgstr "邮箱"
 
-#: tasks/models.py:14
+#: tasks/models.py:15
 msgid "Title"
 msgstr "题名"
 
-#: tasks/models.py:15
+#: tasks/models.py:16
 msgid "Description"
 msgstr "说明"
 
-#: tasks/models.py:16
+#: tasks/models.py:17
 msgid "Completed"
 msgstr "做完了"
 
-#: tasks/models.py:17
+#: tasks/models.py:19
 msgid "Deadline"
 msgstr "期限"
 
-#: tasks/models.py:19
+#: tasks/models.py:21
 msgid "Urgency"
 msgstr "紧急性"
 
-#: tasks/models.py:20
+#: tasks/models.py:22
 msgid "Progress(%)"
 msgstr "进展（%）"
 
-#: tasks/models.py:21
+#: tasks/models.py:23
 msgid "Attached file"
 msgstr "附件"
 
-#: tasks/models.py:22
+#: tasks/models.py:24
 msgid "Image"
 msgstr "图像"
+
+#: tasks/models.py:74 tasks/templates/tasks/task_detail.html:30
+#: tasks/templates/tasks/task_list.html:87
+msgid "進捗"
+msgstr "进展"
+
+#: tasks/models.py:75
+msgid "日時"
+msgstr "日期"
 
 #: tasks/templates/registration/login.html:6
 #: tasks/templates/registration/login.html:31
@@ -112,7 +121,7 @@ msgid "「%(task.title)s」を削除してもよろしいですか？"
 msgstr "可以删除%(task.title)s吗？"
 
 #: tasks/templates/tasks/task_confirm_delete.html:9
-#: tasks/templates/tasks/task_detail.html:55
+#: tasks/templates/tasks/task_detail.html:64
 msgid "削除"
 msgstr "删除"
 
@@ -159,45 +168,55 @@ msgstr "进展情况"
 msgid "サブタスク"
 msgstr "子任务"
 
-#: tasks/templates/tasks/task_detail.html:30
-#: tasks/templates/tasks/task_list.html:82
-msgid "進捗"
-msgstr "进展"
+#: tasks/templates/tasks/task_detail.html:36
+msgid "関連タスク"
+msgstr "有关的任务"
 
-#: tasks/templates/tasks/task_detail.html:35
+#: tasks/templates/tasks/task_detail.html:38
 msgid "状態"
 msgstr "情况"
 
-#: tasks/templates/tasks/task_detail.html:37
+#: tasks/templates/tasks/task_detail.html:40
 #: tasks/templates/tasks/task_list.html:40
 #: tasks/templates/tasks/task_list.html:58
 msgid "完了"
 msgstr "做完了"
 
-#: tasks/templates/tasks/task_detail.html:39
+#: tasks/templates/tasks/task_detail.html:42
 #: tasks/templates/tasks/task_list.html:41
 #: tasks/templates/tasks/task_list.html:60
 msgid "未完了"
 msgstr "没做完"
 
-#: tasks/templates/tasks/task_detail.html:43
+#: tasks/templates/tasks/task_detail.html:46
+#: tasks/templates/tasks/task_detail.html:48
+#: tasks/templates/tasks/task_list.html:79
+#: tasks/templates/tasks/task_list.html:81
+msgid "完了日時"
+msgstr "做完的日期"
+
+#: tasks/templates/tasks/task_detail.html:51
 msgid "添付ファイル"
 msgstr "附件"
 
-#: tasks/templates/tasks/task_detail.html:46
+#: tasks/templates/tasks/task_detail.html:54
 msgid "画像"
 msgstr "图像"
 
-#: tasks/templates/tasks/task_detail.html:50
+#: tasks/templates/tasks/task_detail.html:58
 msgid "編集"
 msgstr "编辑"
 
-#: tasks/templates/tasks/task_detail.html:52
+#: tasks/templates/tasks/task_detail.html:60
 msgid "完了にする"
 msgstr "完了"
 
-#: tasks/templates/tasks/task_detail.html:57
-#: tasks/templates/tasks/task_form.html:46
+#: tasks/templates/tasks/task_detail.html:61
+msgid "進捗履歴を見る"
+msgstr "看进展经历"
+
+#: tasks/templates/tasks/task_detail.html:66
+#: tasks/templates/tasks/task_form.html:51
 msgid "戻る"
 msgstr "返回"
 
@@ -209,7 +228,7 @@ msgstr "编辑任务"
 msgid "タスクの作成"
 msgstr "做任务"
 
-#: tasks/templates/tasks/task_form.html:45
+#: tasks/templates/tasks/task_form.html:50
 msgid "保存"
 msgstr "保存"
 
@@ -261,17 +280,28 @@ msgstr "适用"
 msgid "新しいタスクを作成"
 msgstr "做新任务"
 
-#: tasks/templates/tasks/task_list.html:86
+#: tasks/templates/tasks/task_list.html:91
 msgid "タスクがありません。"
 msgstr "还没有任务"
 
-#: tasks/templates/tasks/task_list.html:90
+#: tasks/templates/tasks/task_list.html:95
 msgid "進捗を更新"
 msgstr "更新进展"
 
-#: tasks/views.py:152 tasks/views.py:188
+#: tasks/views.py:138
+msgid "完了から72時間以上経過しているため、未完了に戻せません。"
+msgstr "因为从做完的时间过了72个小时，所以不能返回【没完】"
+
+#: tasks/views.py:167 tasks/views.py:234
 msgid "Your account was created."
 msgstr "做好了你的帐户"
+
+#~ msgid "{{ task.title }}の進捗履歴"
+#~ msgstr "{{ task.title }}的进展经历"
+
+#, python-format
+#~ msgid "進捗度 (%%)"
+#~ msgstr "进展（%）"
 
 #~ msgid "registerU"
 #~ msgstr "在这里注册用户一下。"

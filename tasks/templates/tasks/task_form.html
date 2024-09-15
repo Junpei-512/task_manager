@@ -42,6 +42,11 @@
     {{ form.parent.label_tag }}
     {{ form.parent }}
 </div>
+    <!-- 関連タスクの選択フィールド -->
+    <div class="form-group">
+        {{ form.related_task.label_tag }}
+        {{ form.related_task }}
+    </div>
         <button type="submit" class="btn btn-primary">{% trans "保存" %}</button>
         <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">{% trans "戻る" %}</a>
     </form>

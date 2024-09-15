@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Progress of {{ task.title }}</h1>
+
+    <!-- 時間軸の単位を選択するドロップダウン -->
+    <label for="timeUnit">Select time span:</label>
+    <select id="timeUnit" class="form-control w-25 mb-3">
+        <option value="hour">Hour</option>
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+    </select>
+
+    <canvas id="progressChart" width="400" height="200"></canvas>
+</div>
+
+<!-- Chart.jsの読み込み -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
+
+<script>
+    // JSONデータを直接エンコードしてJavaScriptに渡す
+    var timestamps = {{ timestamps|safe }};
+    var progressValues = {{ progress_values|safe }};
+
+    // グラフを描画する関数
+    function drawChart(timeUnit) {
+        var ctx = document.getElementById('progressChart').getContext('2d');
+
+        // グラフがすでに存在する場合は削除
+        if (window.progressChart && typeof window.progressChart.destroy === 'function') {
+            window.progressChart.destroy();
+        }
+
+        // 新しいグラフを作成
+        window.progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'progress (%)',
+                    data: progressValues,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',  // 時間軸を有効にする
+                        time: {
+                            unit: timeUnit,  // 選択された時間単位で表示
+                            tooltipFormat: 'MMM d, h:mm a',  // ツールチップのフォーマット
+                            displayFormats: {
+                                hour: 'MMM d, h:mm a',
+                                day: 'MMM d',
+                                week: 'MMM d, yyyy'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'DateTime'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'progress (%)'
+                        },
+                        min: 0,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+
+    // 初期描画 (デフォルトは "hour")
+    drawChart('hour');
+
+    // ユーザーが時間軸の単位を変更した際にグラフを再描画
+    document.getElementById('timeUnit').addEventListener('change', function() {
+        var selectedUnit = this.value;
+        drawChart(selectedUnit);
+    });
+</script>
+{% endblock %}

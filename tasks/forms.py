@@ -10,7 +10,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'description', 'due_date', 'urgency', 'progress','attachment', 'image', 'is_completed', 'parent']
+        fields = ['title', 'description', 'due_date', 'urgency', 'progress','attachment', 'image', 'is_completed', 'parent', 'related_task']
         exclude = ['user']  # ユーザーフィールドを除外
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
@@ -20,6 +20,7 @@ class TaskForm(forms.ModelForm):
              'progress': forms.NumberInput(attrs={'class': 'form-control', 'min': '0', 'max': '100'}),  # 追加
            'urgency': forms.Select(attrs={'class': 'form-control'}),  # ウィジェットを追加
            'parent': forms.Select(attrs={'class': 'form-control'}),
+           'related_task': forms.Select(attrs={'class': 'form-control'}),
         }
         
     def clean_attachment(self):

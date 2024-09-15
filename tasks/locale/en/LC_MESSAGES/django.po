@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 12:28+0900\n"
+"POT-Creation-Date: 2024-09-15 22:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: tasks/forms.py:28
+#: tasks/forms.py:29
 #, fuzzy
 #| msgid "選択してください"
 msgid "ファイルサイズは10MB以下にしてください。"
 msgstr "Upload 10MB or less please."
 
-#: tasks/forms.py:34
+#: tasks/forms.py:35
 #, fuzzy
 #| msgid "選択してください"
 msgid "画像サイズは10MB以下にしてください。"
 msgstr "Upload 10MB or less please."
 
-#: tasks/forms.py:43
+#: tasks/forms.py:44
 #, fuzzy
 #| msgid "アカウントをお持ちでない場合は、"
 msgid "アカウントが作成されました。"
 msgstr "If no account, "
 
-#: tasks/forms.py:59
+#: tasks/forms.py:60
 msgid "email"
 msgstr "email"
 
-#: tasks/models.py:14
+#: tasks/models.py:15
 msgid "Title"
 msgstr "Title"
 
-#: tasks/models.py:15
+#: tasks/models.py:16
 msgid "Description"
 msgstr "Description"
 
-#: tasks/models.py:16
+#: tasks/models.py:17
 msgid "Completed"
 msgstr "Completed"
 
-#: tasks/models.py:17
+#: tasks/models.py:19
 msgid "Deadline"
 msgstr "Deadline"
 
-#: tasks/models.py:19
+#: tasks/models.py:21
 msgid "Urgency"
 msgstr "Urgency"
 
-#: tasks/models.py:20
+#: tasks/models.py:22
 msgid "Progress(%)"
 msgstr "Progress(%)"
 
-#: tasks/models.py:21
+#: tasks/models.py:23
 msgid "Attached file"
 msgstr "Attached file"
 
-#: tasks/models.py:22
+#: tasks/models.py:24
 msgid "Image"
 msgstr "Image"
+
+#: tasks/models.py:74 tasks/templates/tasks/task_detail.html:30
+#: tasks/templates/tasks/task_list.html:87
+msgid "進捗"
+msgstr "Progress"
+
+#: tasks/models.py:75
+msgid "日時"
+msgstr "date time"
 
 #: tasks/templates/registration/login.html:6
 #: tasks/templates/registration/login.html:31
@@ -112,7 +121,7 @@ msgid "「%(task.title)s」を削除してもよろしいですか？"
 msgstr "Can I remove %(task.title)s ?"
 
 #: tasks/templates/tasks/task_confirm_delete.html:9
-#: tasks/templates/tasks/task_detail.html:55
+#: tasks/templates/tasks/task_detail.html:64
 msgid "削除"
 msgstr "Remove"
 
@@ -159,45 +168,55 @@ msgstr "Progress"
 msgid "サブタスク"
 msgstr "Sub task"
 
-#: tasks/templates/tasks/task_detail.html:30
-#: tasks/templates/tasks/task_list.html:82
-msgid "進捗"
-msgstr "Progress"
+#: tasks/templates/tasks/task_detail.html:36
+msgid "関連タスク"
+msgstr "Related task"
 
-#: tasks/templates/tasks/task_detail.html:35
+#: tasks/templates/tasks/task_detail.html:38
 msgid "状態"
 msgstr "Situation"
 
-#: tasks/templates/tasks/task_detail.html:37
+#: tasks/templates/tasks/task_detail.html:40
 #: tasks/templates/tasks/task_list.html:40
 #: tasks/templates/tasks/task_list.html:58
 msgid "完了"
 msgstr "Completed"
 
-#: tasks/templates/tasks/task_detail.html:39
+#: tasks/templates/tasks/task_detail.html:42
 #: tasks/templates/tasks/task_list.html:41
 #: tasks/templates/tasks/task_list.html:60
 msgid "未完了"
 msgstr "Uncompleted"
 
-#: tasks/templates/tasks/task_detail.html:43
+#: tasks/templates/tasks/task_detail.html:46
+#: tasks/templates/tasks/task_detail.html:48
+#: tasks/templates/tasks/task_list.html:79
+#: tasks/templates/tasks/task_list.html:81
+msgid "完了日時"
+msgstr "completed at"
+
+#: tasks/templates/tasks/task_detail.html:51
 msgid "添付ファイル"
 msgstr "Attached File"
 
-#: tasks/templates/tasks/task_detail.html:46
+#: tasks/templates/tasks/task_detail.html:54
 msgid "画像"
 msgstr "Image"
 
-#: tasks/templates/tasks/task_detail.html:50
+#: tasks/templates/tasks/task_detail.html:58
 msgid "編集"
 msgstr "Edit"
 
-#: tasks/templates/tasks/task_detail.html:52
+#: tasks/templates/tasks/task_detail.html:60
 msgid "完了にする"
 msgstr "Complete"
 
-#: tasks/templates/tasks/task_detail.html:57
-#: tasks/templates/tasks/task_form.html:46
+#: tasks/templates/tasks/task_detail.html:61
+msgid "進捗履歴を見る"
+msgstr "Watch Progress History"
+
+#: tasks/templates/tasks/task_detail.html:66
+#: tasks/templates/tasks/task_form.html:51
 msgid "戻る"
 msgstr "Back"
 
@@ -209,7 +228,7 @@ msgstr "Edit Task"
 msgid "タスクの作成"
 msgstr "Create Task"
 
-#: tasks/templates/tasks/task_form.html:45
+#: tasks/templates/tasks/task_form.html:50
 msgid "保存"
 msgstr "Save"
 
@@ -261,17 +280,28 @@ msgstr "Apply"
 msgid "新しいタスクを作成"
 msgstr "Create new Task"
 
-#: tasks/templates/tasks/task_list.html:86
+#: tasks/templates/tasks/task_list.html:91
 msgid "タスクがありません。"
 msgstr "No tasks"
 
-#: tasks/templates/tasks/task_list.html:90
+#: tasks/templates/tasks/task_list.html:95
 msgid "進捗を更新"
 msgstr "Update progress"
 
-#: tasks/views.py:152 tasks/views.py:188
+#: tasks/views.py:138
+msgid "完了から72時間以上経過しているため、未完了に戻せません。"
+msgstr "cannot return to uncompleted because 72hr passed from completed."
+
+#: tasks/views.py:167 tasks/views.py:234
 msgid "Your account was created."
 msgstr "Your account was created."
+
+#~ msgid "{{ task.title }}の進捗履歴"
+#~ msgstr "Progress of {{ task.title }}"
+
+#, python-format
+#~ msgid "進捗度 (%%)"
+#~ msgstr "Progress(%)"
 
 #~ msgid "registerU"
 #~ msgstr "Please register user from here."

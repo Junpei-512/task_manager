@@ -14,4 +14,5 @@ urlpatterns = [
     path('task/<int:pk>/complete/', views.task_complete, name='task_complete'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('tasks/<int:pk>/progress/', views.task_progress_chart, name='task_progress_chart'),
 ]

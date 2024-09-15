@@ -20,7 +20,7 @@
         <div class="progress-bar" role="progressbar" style="width: {{ task.progress }}%;" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100">
             {{ task.progress }}%
         </div>
-    </div>
+</div>
 {% if task.subtasks.exists %}
     <h3>{% trans "サブタスク" %}</h3>
     <ul>
@@ -32,6 +32,9 @@
         {% endfor %}
     </ul>
 {% endif %}
+{% if task.related_task %}
+    <p>{% trans "関連タスク" %}: <a href="{% url 'tasks:task_detail' task.related_task.id %}">{{ task.related_task.title }}</a></p>
+{% endif %}
     <p><strong>{% trans "状態" %}：</strong>
         {% if task.is_completed %}
             <span class="badge badge-success">{% trans "完了" %}</span>
@@ -39,6 +42,11 @@
             <span class="badge badge-warning">{% trans "未完了" %}</span>
         {% endif %}
     </p>
+{% if task.is_completed %}
+    <p>{% trans "完了日時" %}: {{ task.completed_at }}</p>
+{% else %}
+    <p>{% trans "完了日時" %}: </p>
+{% endif %}    
     {% if task.attachment %}
         <p><strong>{% trans "添付ファイル" %}：</strong> <a href="{{ task.attachment.url }}" target="_blank">{{ task.attachment.name }}</a></p>
     {% endif %}
@@ -50,6 +58,7 @@
     <i class="fas fa-edit"></i> {% trans "編集" %}
 </a>
     <a href="{% url 'tasks:task_complete' task.pk %}" class="btn btn-success">{% trans "完了にする" %}</a>
+<a href="{% url 'tasks:task_progress_chart' task.pk %}" target="_blank" class="btn btn-info">{% trans "進捗履歴を見る" %}</a>    
     <form action="{% url 'tasks:task_delete' task.pk %}" method="post" style="display:inline;">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">{% trans "削除" %}</button>
