@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 01:01+0900\n"
+"POT-Creation-Date: 2024-09-15 11:05+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: tasks/forms.py:28
+#, fuzzy
+#| msgid "選択してください"
+msgid "ファイルサイズは10MB以下にしてください。"
+msgstr "请上载10MB以下的附件。"
+
+#: tasks/forms.py:34
+#, fuzzy
+#| msgid "選択してください"
+msgid "画像サイズは10MB以下にしてください。"
+msgstr "请上载10MB以下的图像。"
+
+#: tasks/forms.py:43
+#, fuzzy
+#| msgid "アカウントをお持ちでない場合は、"
+msgid "アカウントが作成されました。"
+msgstr "帐户做好了。"
+
+#: tasks/forms.py:59
+msgid "email"
+msgstr "邮箱"
 
 #: tasks/models.py:14
 msgid "Title"
@@ -63,15 +85,9 @@ msgstr "用户名"
 msgid "パスワード"
 msgstr "密码"
 
-#: tasks/templates/registration/login.html:33
-#, fuzzy
-#| msgid "アカウントをお持ちでない場合は、"
-msgid "アカウントをお持ちでない場合は"
-msgstr "没有帐户，"
-
-#: tasks/templates/registration/login.html:33
-msgid "こちら"
-msgstr "打这里"
+#: tasks/templates/registration/login.html:34
+msgid "registerU"
+msgstr "在这里注册用户一下。"
 
 #: tasks/templates/registration/register.html:6
 msgid "新規ユーザー登録"
@@ -261,6 +277,14 @@ msgid "Your account was created."
 msgstr "做好了你的帐户"
 
 #, fuzzy
-#~| msgid "選択してください"
-#~ msgid "こちらから登録してください。"
-#~ msgstr "请在这里注册一下。"
+#~| msgid "新規ユーザー登録"
+#~ msgid "ユーザー登録"
+#~ msgstr "注册用户"
+
+#, fuzzy
+#~| msgid "ログインはこちら"
+#~ msgid "ユーザー登録はこちらから"
+#~ msgstr "在这里注册"
+
+#~ msgid "こちら"
+#~ msgstr "打这里"

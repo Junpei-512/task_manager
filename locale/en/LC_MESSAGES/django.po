@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 00:10+0900\n"
+"POT-Creation-Date: 2024-09-15 10:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,18 +35,19 @@ msgid "言語を変更"
 msgstr ""
 
 #: templates/base.html:48
-msgid "こんにちは、"
+#, python-format
+msgid ""
+"\n"
+"                    <span class=\"navbar-text\">こんにち"
+"は、%(user.username)s さん</span>\n"
+"                    "
 msgstr ""
 
-#: templates/base.html:48
-msgid "さん"
-msgstr ""
-
-#: templates/base.html:53
+#: templates/base.html:55
 msgid "ログアウト"
 msgstr ""
 
-#: templates/base.html:57
+#: templates/base.html:59
 msgid "ログイン"
 msgstr ""
 

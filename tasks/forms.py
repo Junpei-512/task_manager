@@ -4,6 +4,7 @@ from .models import Task
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 
 class TaskForm(forms.ModelForm):
 
@@ -24,13 +25,13 @@ class TaskForm(forms.ModelForm):
     def clean_attachment(self):
         attachment = self.cleaned_data.get('attachment')
         if attachment and attachment.size > settings.MAX_UPLOAD_SIZE:
-            raise forms.ValidationError('ファイルサイズは10MB以下にしてください。')
+            raise forms.ValidationError(_('ファイルサイズは10MB以下にしてください。'))
         return attachment
 
     def clean_image(self):
         image = self.cleaned_data.get('image')
         if image and image.size > settings.MAX_UPLOAD_SIZE:
-            raise forms.ValidationError('画像サイズは10MB以下にしてください。')
+            raise forms.ValidationError(_('画像サイズは10MB以下にしてください。'))
         return image
         
     def register(request):
@@ -39,7 +40,7 @@ class TaskForm(forms.ModelForm):
             if form.is_valid():
                 user = form.save()
                 login(request, user)
-                messages.success(request, 'アカウントが作成されました。')
+                messages.success(request, _('アカウントが作成されました。'))
                 return redirect('tasks:task_list')
         else:
             form = CustomUserCreationForm()
@@ -55,7 +56,7 @@ class LoginForm(AuthenticationForm):
     )
     
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, label='メールアドレス')
+    email = forms.EmailField(required=True, label=_('email'))
 
     class Meta:
         model = User
